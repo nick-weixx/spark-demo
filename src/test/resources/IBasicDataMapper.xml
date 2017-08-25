@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.playcrab.storm.demo.dao.IBasicData">
+
+	<resultMap type="BasicData" id="basic_data">
+		<id property="id" column="id"></id>
+		<result property="dt" column="dt" javaType="java.sql.Date"
+			jdbcType="DATE" />
+		<result property="game" column="game" />
+		<result property="platform" column="platform" />
+		<result property="gamesvrid" column="gamesvrid" />
+		<result property="viplevel" column="viplevel" javaType="long"
+			jdbcType="INTEGER" />
+		<result property="dau" column="dau" javaType="long" jdbcType="BIGINT" />
+	</resultMap>
+	<!-- <select id="getDictionayByName" parameterType="String" resultMap="report_data_dictionary"> 
+		SELECT d.id,d.f_id,d.name,d.cn_name,d.data_type,d.status,d.create_time,d.update_time,i.interface_name 
+		as interfaceName FROM report_data_dictionary d LEFT JOIN `report_interface_info` 
+		i ON d.f_id = i.id WHERE interface_name =#{name} </select> -->
+
+	<insert id="insert" parameterType="BasicData">
+		insert into basic_data (dt,game,platform,gamesvrid,viplevel,dau)
+		values (
+		#{dt}, #{game}, #{platform}, #{gamesvrid}, #{viplevel},
+		#{dau}) 
+		ON  DUPLICATE KEY UPDATE dau=#{dau}
+	</insert>
+</mapper>

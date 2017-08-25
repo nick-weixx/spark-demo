@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<assembly
+	xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.1"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.1 http://maven.apache.org/xsd/assembly-1.1.1.xsd">
+	<!--This 'all' id is not appended to the produced bundle because we do this: 
+		http://maven.apache.org/plugins/maven-assembly-plugin/faq.html#required-classifiers -->
+
+	<id>jar-with-dependencies</id>
+	<formats>
+		<format>jar</format>
+	</formats>
+	<includeBaseDirectory>false</includeBaseDirectory>
+	<dependencySets>
+		<dependencySet>
+			<unpack>true</unpack>
+			<scope>runtime</scope>
+			<excludes>
+				<exclude>org.apache.storm:storm-core</exclude>
+				<exclude>org.clojure:clojure</exclude>
+				<exclude>org.clojure:tools.macro</exclude>
+				<exclude>org.clojure:tools.logging</exclude>
+				<exclude>org.clojure:tools.cli</exclude>
+				<exclude>org.clojure:math.numeric-tower</exclude>
+				<exclude>org.clojure:math.numeric-tower</exclude>
+				<exclude>clj-time:clj-time</exclude>
+				<exclude>joda-time:joda-time</exclude>
+				<exclude>io.netty:netty</exclude>
+				<exclude>org.jboss.netty:netty</exclude>
+				<exclude>com.twitter:carbonite</exclude>
+				<exclude>jline:jline</exclude>
+				<exclude>org.apache.curator:org.apache.curator</exclude>
+				<exclude>org.apache.curator:curator-client</exclude>
+				<exclude>org.mortbay.jetty:jetty</exclude>
+				<exclude>ring:ring-jetty-adapter</exclude>
+				<exclude>ring:ring-servlet</exclude>
+				<exclude>compojure:compojure</exclude>
+				<exclude>hiccup:hiccup</exclude>
+				<exclude>clj-stacktrace:clj-stacktrace</exclude>
+				<exclude>clout:clout</exclude>
+				<exclude>org.clojure:core.incubator</exclude>
+				<exclude>org.javassist:javassist</exclude>
+				<exclude>org.mortbay.jetty:servlet-api</exclude>
+				<exclude>org.javassist:javassist</exclude>
+				<exclude>org.mortbay.jetty:servlet-api</exclude>
+				
+			</excludes>
+		</dependencySet>
+	</dependencySets>
+
+	<fileSets>
+		<fileSet>
+			<directory>${project.basedir}/resources</directory>
+			<outputDirectory>/</outputDirectory>
+		</fileSet>
+		<fileSet>
+			<directory>${project.basedir}/target/classes</directory>
+			<outputDirectory>/</outputDirectory>
+		</fileSet>
+	</fileSets>
+
+
+</assembly>

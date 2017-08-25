@@ -1,0 +1,45 @@
+
+查看分区偏移量
+/home/hadoop/suguoxin/kafka_2.10-0.8.2.1/bin/kafka-run-class.sh kafka.tools.GetOffsetShell --broker-list 172.16.29.213:9092,172.16.8.154:9092,172.16.8.152:9092 -topic cjg --time -1
+
+/home/hadoop/suguoxin/kafka_2.10-0.8.2.1/bin/kafka-run-class.sh kafka.tools.GetOffsetShell --broker-list 172.16.8.154:9092,172.16.8.152:9092,172.16.29.213:9092 -topic cjg --time -1
+
+
+##查看topic信息
+/home/hadoop/suguoxin/kafka_2.10-0.8.2.1/bin/kafka-topics.sh --zookeeper 172.16.8.152,172.16.8.153,172.16.8.154:2181/kafkaa --list
+
+/home/hadoop/suguoxin/kafka_2.10-0.8.2.1/bin/kafka-topics.sh --zookeeper 172.16.8.152,172.16.8.153,172.16.8.154:2181/kafkaa --describe --topic cjg
+
+##创建分区
+/home/hadoop/suguoxin/kafka_2.10-0.8.2.1/bin/kafka-topics.sh --zookeeper 172.16.8.152,172.16.8.153,172.16.8.154:2181/kafkaa --create --topic cjg --partitions 2  --replication-factor 1
+
+##增加分区
+/home/hadoop/suguoxin/kafka_2.10-0.8.2.1/bin/kafka-topics.sh --zookeeper 172.16.8.152,172.16.8.153,172.16.8.154:2181/kafkaa --alter --topic cjg --partitions 2
+
+##删除topic
+/home/hadoop/suguoxin/kafka_2.10-0.8.2.1/bin/kafka-topics.sh --zookeeper 172.16.8.152,172.16.8.153,172.16.8.154:2181/kafkaa --delete --topic cjg
+
+##创建topic
+/home/hadoop/suguoxin/kafka_2.10-0.8.2.1/bin/kafka-topics.sh --zookeeper 172.16.8.152,172.16.8.153,172.16.8.154:2181/kafkaa --create --topic playerLogin --partitions 1  --replication-factor 1
+/home/hadoop/suguoxin/kafka_2.10-0.8.2.1/bin/kafka-topics.sh --zookeeper 172.16.8.152,172.16.8.153,172.16.8.154:2181/kafkaa --create --topic playerLogout --partitions 1  --replication-factor 1
+
+
+##消费
+/home/hadoop/suguoxin/kafka_2.10-0.8.2.1/bin/kafka-console-consumer.sh -zookeeper 172.16.8.152,172.16.8.153,172.16.8.154:2181/kafkaa --from-beginning --topic cjg
+
+##启动kafka服务
+./kafka-server-start.sh -daemon ../config/server.properties
+
+
+//kafka manager启动
+nohup ./kafka-manager -Dconfig.file=../conf/application.conf >/dev/null 2>&1 &
+
+
+
+
+##发布命令
+~/suguoxin/apache-storm-1.0.3/bin/storm jar com.playcrab.storm.WordCountTopology word-count-topology 
+
+~/suguoxin/apache-storm-1.0.3/bin/storm jar storm-demo-0.0.1-SNAPSHOT.jar com.playcrab.storm.demo.TopologyRunner  false 172.16.8.152,172.16.8.153,172.16.8.154:2181/kafkaa
+
+

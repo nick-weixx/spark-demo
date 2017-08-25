@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+		<typeAlias alias="BasicData" type="com.playcrab.storm.demo.model.BasicData" />
+	</typeAliases>
+	
+	<environments default="pdop_report">
+		<environment id="pdop_report">
+			<transactionManager type="JDBC" />
+			<dataSource type="POOLED">
+				<property name="driver" value="com.mysql.jdbc.Driver" />
+				<property name="url"
+					value="jdbc:mysql://xxxx:xxxx/db?characterEncoding=UTF-8&amp;useOldAliasMetadataBehavior=true&amp;zeroDateTimeBehavior=convertToNull" />
+				<property name="username" value="xxx" />
+				<property name="password" value="xxxx" />
+			</dataSource>
+		</environment>
+	</environments>
+	<!-- 设置别名  172.16.29.213 -->
+
+	<mappers>
+		<mapper resource="IBasicDataMapper.xml" />
+	</mappers>
+</configuration>
